@@ -4,7 +4,7 @@
   Giara
 </h1>
 
-<p align="center"><b>This is the snap for Giara</b>, <i>“Giara is a reddit app, built with Python, GTK and Handy. Created with mobile Linux in mind.”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
+<p align="center"><b>This is the snap for Giara</b>, <i>“a reddit app, built with Python, GTK and Handy”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
 distributions.</p>
 
 <!-- Uncomment and modify this when you are provided a build status badge
