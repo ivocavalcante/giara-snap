@@ -29,7 +29,9 @@ distributions.</p>
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 
-![Giara](resources/screenshot.png?raw=true "Giara")
+<h1 align="center">
+  <img src="https://github.com/ivocavalcante/giara-snap/blob/master/resources/screenshot.png" alt="Giara">
+</h1>
 
 ## Remaining tasks
 <!-- Uncomment and modify this when you have a screenshot
