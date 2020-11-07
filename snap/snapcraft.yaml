@@ -121,12 +121,15 @@ parts:
       - libgirepository1.0-dev
     stage-packages:
       - python3-gi
+      - python3-gi-cairo
       - python3-dateutil
       - gir1.2-gtk-3.0
       - gir1.2-webkit2-4.0
       - gir1.2-gtksource-4
       - gir1.2-gdkpixbuf-2.0
     override-build: |
+      _version="$(git describe --tags | cut -d_ -f2)"
+      snapcraftctl set-version "${_version}-snap1"
       snapcraftctl build
       python3 -m pip install --upgrade requests -t "${SNAPCRAFT_PART_INSTALL}/usr/local/lib/python3.8/dist-packages"
       python3 -m pip install --upgrade beautifulsoup4 -t "${SNAPCRAFT_PART_INSTALL}/usr/local/lib/python3.8/dist-packages"
