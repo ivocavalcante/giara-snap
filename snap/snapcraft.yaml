@@ -1,7 +1,7 @@
 name: giara
 base: core20
 adopt-info: giara
-grade: devel
+grade: stable
 confinement: strict
 
 slots:
@@ -23,11 +23,6 @@ plugs:
     default-provider: gtk-common-themes
     interface: content
     target: $SNAP/data-dir/sounds
-    #netinfo:
-    #interface: system-files
-    #read:
-    #- /etc/host.conf
-    #- /etc/hosts
 
 apps:
   giara:
