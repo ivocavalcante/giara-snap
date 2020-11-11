@@ -26,14 +26,14 @@ plugs:
 
 apps:
   giara:
-    command: usr/local/bin/giara
+    command: usr/bin/giara
     command-chain: [ bin/desktop-launch ]
     common-id: org.gabmus.giara
     environment:
       GTK_USE_PORTAL: '1'
-      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/usr/local/lib/python3.8/dist-packages:$SNAP/usr/local/lib/python3.8/site-packages
-      GI_TYPELIB_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0:$SNAP/usr/local/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0
-      LD_LIBRARY_PATH: $SNAP/usr/local/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libgtk-3-0:$LD_LIBRARY_PATH
+      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/usr/lib/python3.8/dist-packages:$SNAP/usr/lib/python3.8/site-packages
+      GI_TYPELIB_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0
+      LD_LIBRARY_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libgtk-3-0:$LD_LIBRARY_PATH
     slots: [ dbus-giara ]
     plugs:
       - desktop
@@ -50,8 +50,8 @@ layout:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0
   /usr/share/xml/iso-codes:
     bind: $SNAP/usr/share/xml/iso-codes
-  /usr/local/share/giara:
-    bind: $SNAP/usr/local/share/giara
+  /usr/share/giara:
+    bind: $SNAP/usr/share/giara
 
 parts:
   desktop-gtk3:
@@ -113,7 +113,9 @@ parts:
     source: https://gitlab.gnome.org/World/giara.git
     source-tag: '0.2'
     plugin: meson
-    parse-info: [ usr/local/share/metainfo/org.gabmus.giara.appdata.xml ]
+    parse-info: [ usr/share/metainfo/org.gabmus.giara.appdata.xml ]
+    meson-parameters:
+      - --prefix=/usr
     build-packages:
       - appstream
       - cmake
@@ -131,9 +133,11 @@ parts:
       _version="$(git describe --tags | cut -d_ -f2)"
       snapcraftctl set-version "${_version}-snap1"
       snapcraftctl build
-      python3 -m pip install --upgrade requests -t "${SNAPCRAFT_PART_INSTALL}/usr/local/lib/python3.8/dist-packages"
-      python3 -m pip install --upgrade beautifulsoup4 -t "${SNAPCRAFT_PART_INSTALL}/usr/local/lib/python3.8/dist-packages"
-      python3 -m pip install --upgrade Pillow -t "${SNAPCRAFT_PART_INSTALL}/usr/local/lib/python3.8/dist-packages"
-      python3 -m pip install --upgrade praw -t "${SNAPCRAFT_PART_INSTALL}/usr/local/lib/python3.8/dist-packages"
-      python3 -m pip install --upgrade mistune -t "${SNAPCRAFT_PART_INSTALL}/usr/local/lib/python3.8/dist-packages"
-
+      python3 -m pip install --upgrade requests -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
+      python3 -m pip install --upgrade beautifulsoup4 -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
+      python3 -m pip install --upgrade Pillow -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
+      python3 -m pip install --upgrade praw -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
+      python3 -m pip install --upgrade mistune -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
+    override-prime: |
+      snapcraftctl prime
+      sed -i 's|Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.gabmus.giara.svg|g' $SNAPCRAFT_PRIME/usr/share/applications/org.gabmus.giara.desktop
