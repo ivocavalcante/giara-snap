@@ -92,6 +92,7 @@ parts:
       - '-Dglade_catalog=disabled'
       - '-Dtests=false'
       - '-Dexamples=false'
+      - --prefix=/usr
     build-packages:
       - debhelper-compat
       - dh-sequence-gir
