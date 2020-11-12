@@ -3,6 +3,7 @@ base: core20
 adopt-info: giara
 grade: stable
 confinement: strict
+compression: lzo
 
 slots:
   dbus-giara:
@@ -92,7 +93,7 @@ parts:
       - '-Dglade_catalog=disabled'
       - '-Dtests=false'
       - '-Dexamples=false'
-      - --prefix=/usr
+      - '--prefix=/usr'
     build-packages:
       - debhelper-compat
       - dh-sequence-gir
@@ -116,7 +117,7 @@ parts:
     plugin: meson
     parse-info: [ usr/share/metainfo/org.gabmus.giara.appdata.xml ]
     meson-parameters:
-      - --prefix=/usr
+      - '--prefix=/usr'
     build-packages:
       - appstream
       - cmake
@@ -142,3 +143,4 @@ parts:
     override-prime: |
       snapcraftctl prime
       sed -i 's|Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.gabmus.giara.svg|g' $SNAPCRAFT_PRIME/usr/share/applications/org.gabmus.giara.desktop
+
