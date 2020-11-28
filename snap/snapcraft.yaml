@@ -87,7 +87,7 @@ parts:
 
   libhandy:
     source: https://gitlab.gnome.org/GNOME/libhandy.git
-    source-tag: '1.0.1'
+    source-tag: '1.0.2'
     plugin: meson
     meson-parameters:
       - '-Dglade_catalog=disabled'
@@ -113,7 +113,7 @@ parts:
       - desktop-gtk3
       - libhandy
     source: https://gitlab.gnome.org/World/giara.git
-    source-tag: '0.2'
+    source-tag: '0.3'
     plugin: meson
     parse-info: [ usr/share/metainfo/org.gabmus.giara.appdata.xml ]
     meson-parameters:
