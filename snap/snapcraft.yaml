@@ -34,7 +34,7 @@ apps:
       GTK_USE_PORTAL: '1'
       PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/usr/lib/python3.8/dist-packages:$SNAP/usr/lib/python3.8/site-packages
       GI_TYPELIB_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0
-      LD_LIBRARY_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libgtk-3-0:$LD_LIBRARY_PATH
+      LD_LIBRARY_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libgtk-3-0
     slots: [ dbus-giara ]
     plugs:
       - desktop
@@ -133,7 +133,7 @@ parts:
       - gir1.2-gdkpixbuf-2.0
     override-build: |
       _version="$(git describe --tags | cut -d_ -f2)"
-      snapcraftctl set-version "${_version}-snap1"
+      snapcraftctl set-version "${_version}-snap2"
       snapcraftctl build
       python3 -m pip install --upgrade requests -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
       python3 -m pip install --upgrade beautifulsoup4 -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
