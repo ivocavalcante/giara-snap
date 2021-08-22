@@ -30,6 +30,7 @@ apps:
     command: usr/bin/giara
     command-chain: [ bin/desktop-launch ]
     common-id: org.gabmus.giara
+    desktop: usr/share/applications/org.gabmus.giara.desktop
     environment:
       GTK_USE_PORTAL: '1'
       PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/usr/lib/python3.8/dist-packages:$SNAP/usr/lib/python3.8/site-packages
@@ -115,7 +116,7 @@ parts:
     source: https://gitlab.gnome.org/World/giara.git
     source-tag: '0.3'
     plugin: meson
-    parse-info: [ usr/share/metainfo/org.gabmus.giara.appdata.xml ]
+    parse-info: [ data/org.gabmus.giara.appdata.xml ]
     meson-parameters:
       - '--prefix=/usr'
     build-packages:
@@ -131,9 +132,11 @@ parts:
       - gir1.2-webkit2-4.0
       - gir1.2-gtksource-4
       - gir1.2-gdkpixbuf-2.0
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
       _version="$(git describe --tags | cut -d_ -f2)"
-      snapcraftctl set-version "${_version}-snap2"
+      snapcraftctl set-version "${_version}+snap3"
+    override-build: |
       snapcraftctl build
       python3 -m pip install --upgrade requests -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
       python3 -m pip install --upgrade beautifulsoup4 -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
