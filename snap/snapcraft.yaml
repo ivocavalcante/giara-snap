@@ -135,7 +135,7 @@ parts:
     override-pull: |
       snapcraftctl pull
       _version="$(git describe --tags | cut -d_ -f2)"
-      snapcraftctl set-version "${_version}+snap3"
+      snapcraftctl set-version "${_version}+snap4"
     override-build: |
       snapcraftctl build
       python3 -m pip install --upgrade requests -t "${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/dist-packages"
